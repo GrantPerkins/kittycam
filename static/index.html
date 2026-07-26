@@ -40,25 +40,8 @@
             border-radius: 8px;
         }
 
-        button {
-            font-size: 18px;
-            padding: 8px 14px;
-            cursor: pointer;
-        }
-
         #fps {
-            margin-top: 8px;
             font-size: 18px;
-        }
-
-        /* Hide controls while fullscreen unless mouse is moved */
-        body:fullscreen #controls {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        body:fullscreen:hover #controls {
-            opacity: 1;
         }
     </style>
 </head>
@@ -66,15 +49,10 @@
 <body>
 
     <div id="controls">
-        <button id="fullscreen-btn">
-            Fullscreen
-        </button>
-
         <div id="fps">
             FPS: 0
         </div>
     </div>
-
 
     <img id="camera" src="/stream">
 
@@ -82,8 +60,6 @@
     <script>
         const img = document.getElementById("camera");
         const fpsText = document.getElementById("fps");
-        const fullscreenButton = document.getElementById("fullscreen-btn");
-
 
         // FPS counter based on actual browser image updates
         let frames = 0;
@@ -98,26 +74,6 @@
                 fpsText.innerText = `FPS: ${frames}`;
                 frames = 0;
                 last = now;
-            }
-        };
-
-
-        // Full webpage fullscreen
-        fullscreenButton.onclick = async () => {
-            try {
-                await document.documentElement.requestFullscreen();
-            } catch (err) {
-                console.error("Fullscreen failed:", err);
-            }
-        };
-
-
-        // Double-click image for fullscreen
-        img.ondblclick = async () => {
-            try {
-                await document.documentElement.requestFullscreen();
-            } catch (err) {
-                console.error("Fullscreen failed:", err);
             }
         };
     </script>
