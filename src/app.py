@@ -1,12 +1,22 @@
 import logging
-from fastapi import FastAPI, Request
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
 
 from src.services.stream import KittyCamera
-from fastapi.responses import StreamingResponse
+
 
 app = FastAPI()
 kitty_cam = KittyCamera()
 logging.basicConfig(level=logging.INFO)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    kitty_cam.start()
+    yield
+    kitty_cam.stop()
 
 @app.get("/")
 async def stream():
