@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>KittyCam</title>
     <style>
@@ -17,31 +18,32 @@
 
 <body>
 
-<h1>KittyCam</h1>
+    <h1>KittyCam</h1>
 
-<div id="fps">FPS: 0</div>
+    <div id="fps">FPS: 0</div>
 
-<img id="camera" src="/stream">
+    <img id="camera" src="/stream">
 
-<script>
-const img = document.getElementById("camera");
-const fps = document.getElementById("fps");
+    <script>
+        const img = document.getElementById("camera");
+        const fps = document.getElementById("fps");
 
-let frames = 0;
-let last = performance.now();
+        let frames = 0;
+        let last = performance.now();
 
-img.onload = () => {
-    frames++;
+        img.onload = () => {
+            frames++;
 
-    const now = performance.now();
+            const now = performance.now();
 
-    if (now - last >= 1000) {
-        fps.innerText = `FPS: ${frames}`;
-        frames = 0;
-        last = now;
-    }
-};
-</script>
+            if (now - last >= 1000) {
+                fps.innerText = `FPS: ${frames}`;
+                frames = 0;
+                last = now;
+            }
+        };
+    </script>
 
 </body>
+
 </html>

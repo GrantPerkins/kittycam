@@ -22,10 +22,10 @@ class KittyCamera:
         self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
         self.camera.set(cv2.CAP_PROP_FPS, 30)
 
-        print("FOURCC:", self.camera.get(cv2.CAP_PROP_FOURCC))
-        print("WIDTH:", self.camera.get(cv2.CAP_PROP_FRAME_WIDTH))
-        print("HEIGHT:", self.camera.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        print("FPS:", self.camera.get(cv2.CAP_PROP_FPS))
+        self.logger.info("FOURCC:"+str(self.camera.get(cv2.CAP_PROP_FOURCC)))
+        self.logger.info("WIDTH:"+str(self.camera.get(cv2.CAP_PROP_FRAME_WIDTH)))
+        self.logger.info("HEIGHT:"+str(self.camera.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+        self.logger.info("FPS:"+str(self.camera.get(cv2.CAP_PROP_FPS)))
 
         if not self.camera.isOpened():
             self.logger.error("failed to open camera")
