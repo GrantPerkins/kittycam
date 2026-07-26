@@ -83,7 +83,7 @@ class KittyCamera:
                 f"{datetime.now():%m/%d/%y, %H:%M:%S}    FPS: {self.fps:.1f}"
             )
 
-            position = (25, frame.shape[0] - 25)
+            position = (5, frame.shape[0] - 5)
 
             cv2.putText(
                 frame,
