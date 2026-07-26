@@ -12,6 +12,7 @@ class KittyCamera:
         self.camera = cv2.VideoCapture("/dev/video0")
 
         if not self.camera.isOpened():
+            self.logger.error("failed to open camera")
             raise RuntimeError("Could not open camera: /dev/video0")
 
         self.running = False
