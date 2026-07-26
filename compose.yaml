@@ -3,6 +3,8 @@ services:
     build: .
     ports:
       - "8000:8000"
+    devices:
+      - /dev/video0:/dev/video0
 
   cloudflared:
     image: cloudflare/cloudflared:latest
