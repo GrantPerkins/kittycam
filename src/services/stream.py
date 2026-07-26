@@ -13,6 +13,15 @@ class KittyCamera:
 
         self.camera = cv2.VideoCapture("/dev/video0")
 
+        self.camera.set(
+            cv2.CAP_PROP_FOURCC,
+            cv2.VideoWriter_fourcc(*"MJPG")
+        )
+
+        self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+        self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+        self.camera.set(cv2.CAP_PROP_FPS, 30)
+
         if not self.camera.isOpened():
             self.logger.error("failed to open camera")
             raise RuntimeError("Could not open camera: /dev/video0")
