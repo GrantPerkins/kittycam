@@ -78,31 +78,30 @@ class KittyCamera:
                 self.frame_count = 0
                 self.last_fps_time = now
 
-            # ---- Overlay timestamp ----
-            timestamp = datetime.now().strftime(
-                "%m/%d/%y, %H:%M:%S"
+            # ---- Overlay timestamp + FPS ----
+            overlay_text = (
+                f"{datetime.now():%m/%d/%y, %H:%M:%S}    FPS: {self.fps:.1f}"
             )
+
+            position = (25, frame.shape[0] - 25)
 
             cv2.putText(
                 frame,
-                timestamp,
-                (20, frame.shape[0] - 50),
+                overlay_text,
+                position,
                 cv2.FONT_HERSHEY_SIMPLEX,
-                1.0,
-                (255, 255, 255),
-                2,
+                0.8,
+                (0, 0, 0),
+                4,
                 cv2.LINE_AA,
             )
 
-            # ---- Overlay FPS ----
-            fps_text = f"FPS: {self.fps:.1f}"
-
             cv2.putText(
                 frame,
-                fps_text,
-                (20, frame.shape[0] - 15),
+                overlay_text,
+                position,
                 cv2.FONT_HERSHEY_SIMPLEX,
-                1.0,
+                0.8,
                 (255, 255, 255),
                 2,
                 cv2.LINE_AA,
