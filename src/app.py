@@ -33,5 +33,10 @@ async def manifest():
 async def stream():
     return StreamingResponse(
         kitty_cam.stream(),
-        media_type="multipart/x-mixed-replace; boundary=frame"
+        media_type="multipart/x-mixed-replace; boundary=frame",
+        headers={
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+            "X-Accel-Buffering": "no",
+        },
     )

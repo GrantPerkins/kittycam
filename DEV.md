@@ -2,6 +2,8 @@
 
 ## Scripts
 ```
+ssh gcperk20@kittycam.local
+
 .\.venv\Scripts\Activate.ps1
 
 python .\scripts\test_endpoint.py
