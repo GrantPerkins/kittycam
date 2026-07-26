@@ -1,4 +1,6 @@
 import threading
+import time
+from datetime import datetime
 
 import cv2
 
@@ -21,6 +23,11 @@ class KittyCamera:
         self.latest_jpeg: bytes = b""
         self.condition = threading.Condition()
 
+        # FPS tracking
+        self.frame_count = 0
+        self.last_fps_time = time.monotonic()
+        self.fps = 0.0
+
     def start(self):
         if self.running:
             return
@@ -42,7 +49,6 @@ class KittyCamera:
 
         self.running = False
 
-        # Wake any waiting stream generators so they can exit.
         with self.condition:
             self.condition.notify_all()
 
@@ -61,6 +67,48 @@ class KittyCamera:
                 self.logger.error("Failed to read frame from camera")
                 continue
 
+            # ---- FPS calculation ----
+            self.frame_count += 1
+
+            now = time.monotonic()
+            elapsed = now - self.last_fps_time
+
+            if elapsed >= 1.0:
+                self.fps = self.frame_count / elapsed
+                self.frame_count = 0
+                self.last_fps_time = now
+
+            # ---- Overlay timestamp ----
+            timestamp = datetime.now().strftime(
+                "%m/%d/%y, %H:%M:%S"
+            )
+
+            cv2.putText(
+                frame,
+                timestamp,
+                (20, frame.shape[0] - 50),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1.0,
+                (255, 255, 255),
+                2,
+                cv2.LINE_AA,
+            )
+
+            # ---- Overlay FPS ----
+            fps_text = f"FPS: {self.fps:.1f}"
+
+            cv2.putText(
+                frame,
+                fps_text,
+                (20, frame.shape[0] - 15),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1.0,
+                (255, 255, 255),
+                2,
+                cv2.LINE_AA,
+            )
+
+            # ---- JPEG encode ----
             success, buffer = cv2.imencode(
                 ".jpg",
                 frame,
@@ -81,7 +129,7 @@ class KittyCamera:
         while self.running:
             with self.condition:
                 self.condition.wait_for(
-                    lambda: self.latest_jpeg is not None or not self.running
+                    lambda: bool(self.latest_jpeg) or not self.running
                 )
 
                 if not self.running:
