@@ -1,4 +1,4 @@
 import logging
 
-def get_logger():
+def get_logger() -> logging.Logger:
     return logging.getLogger(__name__)

@@ -1,16 +1,16 @@
 import logging
 from fastapi import FastAPI, Request
 
-from src.services.stream import get_camera, generate_frames
+from src.services.stream import KittyCamera
 from fastapi.responses import StreamingResponse
 
 app = FastAPI()
-camera = get_camera()
+kitty_cam = KittyCamera()
 logging.basicConfig(level=logging.INFO)
 
 @app.get("/")
 async def stream():
     return StreamingResponse(
-        generate_frames(camera),
+        kitty_cam.stream(),
         media_type="multipart/x-mixed-replace; boundary=frame"
     )
