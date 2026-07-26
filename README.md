@@ -18,8 +18,8 @@ i want to watch my cats from work, on vaca, etc. especially since Kylee is flyin
 - 
 
 ## Implementation
-- [] image the sd card
-- [] confirm ssh access
+- [X] image the sd card
+- [X] confirm ssh access
 - [] establish github pull access
 - [] create hello world flask app with docker compose
 - [] push initial built containers to a dockerhub repo
@@ -28,6 +28,6 @@ i want to watch my cats from work, on vaca, etc. especially since Kylee is flyin
 - [] connect cloudtrail tunnel
 - [] connect cloudtrail access with allowlist
 - [] E2E helloworld validation
-- [] design actual service w/camera
+- [] design actual service w/mock camera
 - [] finish off impl
 - [] brag to kylee, bday present
