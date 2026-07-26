@@ -4,6 +4,10 @@
 ```
 ssh gcperk20@kittycam.local
 
+sudo systemctl stop kittycam.service
+systemctl status kittycam.service
+sudo systemctl start kittycam.service
+
 .\.venv\Scripts\Activate.ps1
 
 python .\scripts\test_endpoint.py
