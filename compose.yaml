@@ -3,3 +3,15 @@ services:
     build: .
     ports:
       - "8000:8000"
+
+  # cloudflared:
+  #   image: cloudflare/cloudflared:latest
+  #   restart: unless-stopped
+
+  #   command: tunnel run
+
+  #   volumes:
+  #     - ./cloudflared:/etc/cloudflared
+
+  #   depends_on:
+  #     - kittycam-server
