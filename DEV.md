@@ -8,6 +8,8 @@ sudo systemctl stop kittycam.service
 systemctl status kittycam.service
 sudo systemctl start kittycam.service
 
+su - kittycam
+
 .\.venv\Scripts\Activate.ps1
 
 python .\scripts\test_endpoint.py
