@@ -24,6 +24,10 @@ logging.basicConfig(level=logging.INFO)
 async def index():
     return FileResponse("static/index.html")
 
+@app.get("/manifest.json")
+async def manifest():
+    return FileResponse("static/manifest.json")
+
 
 @app.get("/stream")
 async def stream():
