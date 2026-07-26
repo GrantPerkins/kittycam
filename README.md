@@ -20,10 +20,12 @@ i want to watch my cats from work, on vaca, etc. especially since Kylee is flyin
 ## Implementation
 - [X] image the sd card
 - [X] confirm ssh access
+- [X] create non-root user and ensure ssh access
+- [X] install git, docker
 - [] establish github pull access
-- [] create hello world flask app with docker compose
+- [X] create hello world flask app with docker compose
 - [] push initial built containers to a dockerhub repo
-- [] validate service startup on rpi
+- [] validate service startup on pi
 - [] see if helloworld app accessible on local network (optional)
 - [] connect cloudtrail tunnel
 - [] connect cloudtrail access with allowlist
