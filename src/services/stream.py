@@ -126,7 +126,7 @@ class KittyCamera:
             success, buffer = cv2.imencode(
                 ".jpg",
                 frame,
-                [cv2.IMWRITE_JPEG_QUALITY, 90],
+                [cv2.IMWRITE_JPEG_QUALITY, 70],
             )
 
             if not success:

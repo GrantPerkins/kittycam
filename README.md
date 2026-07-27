@@ -22,14 +22,14 @@ i want to watch my cats from work, on vaca, etc. especially since Kylee is flyin
 - [X] confirm ssh access
 - [X] create non-root user and ensure ssh access
 - [X] install git, docker
-- [] establish github pull access
+- [X] establish github pull access
 - [X] create hello world flask app with docker compose
-- [] push initial built containers to a dockerhub repo
-- [] validate service startup on pi
-- [] see if helloworld app accessible on local network (optional)
-- [] connect cloudtrail tunnel
-- [] connect cloudtrail access with allowlist
-- [] E2E helloworld validation
-- [] design actual service w/mock camera
-- [] finish off impl
-- [] brag to kylee, bday present
+- [X] validate service startup on pi
+- [X] see if helloworld app accessible on local network (optional)
+- [X] connect cloudtrail tunnel
+- [X] connect cloudtrail access with allowlist
+- [X] E2E helloworld validation
+- [X] design actual service w/mock camera
+- [X] finish off impl
+- [X] brag to kylee, bday present
+- [X] enable jwt auth on all endpoints

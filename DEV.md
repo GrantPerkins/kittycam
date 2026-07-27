@@ -8,6 +8,8 @@ sudo systemctl stop kittycam.service
 systemctl status kittycam.service
 sudo systemctl start kittycam.service
 
+docker compose logs kittycam-server -f
+
 su - kittycam
 
 .\.venv\Scripts\Activate.ps1
