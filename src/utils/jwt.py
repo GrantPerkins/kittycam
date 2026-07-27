@@ -1,7 +1,7 @@
 from jwt import PyJWKClient
 import jwt
 
-from utils.config import Config
+from src.utils.config import Config
 
 class JWTHelper:
     def __init__(self, config: Config):
