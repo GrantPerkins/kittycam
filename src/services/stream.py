@@ -3,6 +3,7 @@ import time
 from datetime import datetime
 
 import cv2
+from fastapi import Request
 
 from src.utils.logger import get_logger
 
@@ -138,8 +139,11 @@ class KittyCamera:
                 self.latest_jpeg = jpeg
                 self.condition.notify_all()
 
-    def stream(self):
+    async def stream(self, request: Request):
         while self.running:
+            if await request.is_disconnected():
+                self.logger.info("request disconnected")
+                break
             with self.condition:
                 self.condition.wait_for(
                     lambda: bool(self.latest_jpeg) or not self.running
