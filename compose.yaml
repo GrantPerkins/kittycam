@@ -1,6 +1,6 @@
 services:
   kittycam-server:
-    build: .
+    build: ./cam
     expose:
       - "8000"
     devices:

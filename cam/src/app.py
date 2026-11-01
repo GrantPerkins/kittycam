@@ -1,18 +1,22 @@
 import logging
+from typing import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import StreamingResponse, FileResponse
 
+from src.services.yolo26 import YoloCatDetector
 from src.services.stream import KittyCamera
 from src.middleware.jwt import CloudflareAccessMiddleware
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
     kitty_cam.start()
-    yield
-    kitty_cam.stop()
+    try:
+        yield
+    finally:
+        kitty_cam.stop()
 
 
 app = FastAPI(lifespan=lifespan)
@@ -24,7 +28,8 @@ app.add_middleware(
     },
 )
 
-kitty_cam = KittyCamera()
+cat_detector = YoloCatDetector()
+kitty_cam = KittyCamera(cat_detector=cat_detector)
 logging.basicConfig(level=logging.INFO)
 
 

@@ -5,20 +5,19 @@ from datetime import datetime
 import cv2
 from fastapi import Request
 
+from src.services.yolo26 import YoloCatDetector
 from src.utils.logger import get_logger
 
 
 class KittyCamera:
-    def __init__(self):
+    def __init__(self, cat_detector:YoloCatDetector|None=None):
         self.logger = get_logger()
 
         self.camera = cv2.VideoCapture("/dev/video0")
-
         self.camera.set(
             cv2.CAP_PROP_FOURCC,
             cv2.VideoWriter_fourcc(*"MJPG")
         )
-
         self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
         self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
         self.camera.set(cv2.CAP_PROP_FPS, 30)
@@ -36,6 +35,7 @@ class KittyCamera:
         self.capture_thread: threading.Thread | None = None
 
         self.latest_jpeg: bytes = b""
+        self.cat_detector = cat_detector
         self.condition = threading.Condition()
 
         # FPS tracking
@@ -87,6 +87,12 @@ class KittyCamera:
 
             now = time.monotonic()
             elapsed = now - self.last_fps_time
+
+            if self.cat_detector is not None and self.frame_count % 10 == 0:
+                cat_present = self.cat_detector.invoke(frame)
+                if cat_present:
+                    # TODO: notify somehow
+                    self.logger.info("KITTY DETECTED")
 
             if elapsed >= 1.0:
                 self.fps = self.frame_count / elapsed
