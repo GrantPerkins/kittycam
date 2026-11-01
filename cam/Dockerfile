@@ -13,10 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxrender1 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY torch-requirements.txt torch-requirements.txt
+COPY torch-requirements.txt torch-requirements.txt 
 
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r torch-requirements.txt
+    pip install --no-cache-dir -r torch-requirements.txt --index-url https://download.pytorch.org/whl/cpu
 
 COPY requirements.txt requirements.txt
 
