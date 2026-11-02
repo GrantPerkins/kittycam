@@ -1,6 +1,6 @@
 services:
   kittycam-server:
-    build: ./cam
+    image: grantperkins/kittycam:latest
     expose:
       - "8000"
     devices:

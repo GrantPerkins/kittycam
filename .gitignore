@@ -3,3 +3,4 @@
 *.png
 .env
 cloudflared/33297d27-e3b1-49f7-80f0-d12d3f917d69.json
+.vscode/
