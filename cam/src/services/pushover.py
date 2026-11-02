@@ -9,6 +9,7 @@ class PushNotifications:
         self.url = "https://api.pushover.net/1/messages.json"
         self.token, self.userid = get_pushover_token_and_userid()
         self.last = None
+        self.frequency_seconds = 60 * 15 # (15 minutes of seconds)
 
     def __now_seconds(self):
         return time.time()
