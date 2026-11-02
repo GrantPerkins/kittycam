@@ -15,7 +15,7 @@ class PushNotifications:
         return time.time()
 
     def send(self, animal):
-        if self.last is None or self.last > 60 + self.__now_seconds():
+        if self.last is None or self.last + self.frequency_seconds > + self.__now_seconds():
             response = requests.post(
                 self.url,
                     data={
@@ -26,3 +26,4 @@ class PushNotifications:
             )
 
             response.raise_for_status()
+            self.last = self.__now_seconds()
