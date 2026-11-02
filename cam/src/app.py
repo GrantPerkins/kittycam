@@ -1,5 +1,4 @@
 import logging
-from typing import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
@@ -11,7 +10,7 @@ from src.middleware.jwt import CloudflareAccessMiddleware
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
+async def lifespan(app: FastAPI):
     kitty_cam.start()
     try:
         yield
