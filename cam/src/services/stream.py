@@ -85,7 +85,7 @@ class KittyCamera:
 
             # ---- FPS calculation ----
             self.frame_count += 1
-            self.real_frame_count = (self.real_frame_count + 1) % 10
+            self.real_frame_count = (self.real_frame_count + 1) % 20
 
             now = time.monotonic()
             elapsed = now - self.last_fps_time
@@ -94,9 +94,6 @@ class KittyCamera:
                 detected_class = self.cat_detector.invoke(frame)
                 # if cat_present:
                 #     # TODO: notify somehow
-                self.logger.info(f"Detected a: {detected_class}")
-            else:
-                self.logger.info(f"no detector because {self.cat_detector is not None}, {self.real_frame_count}")
 
             if elapsed >= 1.0:
                 self.fps = self.frame_count / elapsed
