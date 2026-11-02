@@ -85,7 +85,7 @@ class KittyCamera:
 
             # ---- FPS calculation ----
             self.frame_count += 1
-            self.real_frame_count = (self.real_frame_count) + 1 % 10
+            self.real_frame_count = (self.real_frame_count + 1) % 10
 
             now = time.monotonic()
             elapsed = now - self.last_fps_time
