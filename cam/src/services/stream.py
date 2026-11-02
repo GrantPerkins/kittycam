@@ -93,7 +93,7 @@ class KittyCamera:
             now = time.monotonic()
             elapsed = now - self.last_fps_time
 
-            if self.last_detection is None or self.last_detection + self.detection_frequency_seconds > get_time_now_seconds():
+            if self.last_detection is None or self.last_detection + self.detection_frequency_seconds < get_time_now_seconds():
                 detected = self.cat_detector.invoke(frame)
                 self.last_detection = get_time_now_seconds()
                 if detected:
