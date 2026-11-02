@@ -23,7 +23,7 @@ class YoloCatDetector:
                 class_id = int(box.cls.item())
                 confidence = float(box.conf.item())
                 class_name = result.names[class_id].lower()
-                if confidence < 0.5:
+                if confidence < 0.25:
                     return False
                 return class_name
 
