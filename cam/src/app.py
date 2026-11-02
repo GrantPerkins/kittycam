@@ -6,6 +6,7 @@ from fastapi.responses import StreamingResponse, FileResponse
 
 from src.services.yolo26 import YoloCatDetector
 from src.services.stream import KittyCamera
+from src.services.pushover import PushNotifications
 from src.middleware.jwt import CloudflareAccessMiddleware
 
 
@@ -28,7 +29,8 @@ app.add_middleware(
 )
 
 cat_detector = YoloCatDetector()
-kitty_cam = KittyCamera(cat_detector=cat_detector)
+pushover = PushNotifications()
+kitty_cam = KittyCamera(cat_detector, pushover)
 logging.basicConfig(level=logging.INFO)
 
 
