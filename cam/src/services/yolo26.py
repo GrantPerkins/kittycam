@@ -25,8 +25,7 @@ class YoloCatDetector:
                 class_name = result.names[class_id].lower()
                 if confidence < 0.5:
                     return False
-                if class_name == "cat":
-                    return True
+                return class_name
 
 
             

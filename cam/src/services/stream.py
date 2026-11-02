@@ -89,10 +89,10 @@ class KittyCamera:
             elapsed = now - self.last_fps_time
 
             if self.cat_detector is not None and self.frame_count % 10 == 0:
-                cat_present = self.cat_detector.invoke(frame)
-                if cat_present:
-                    # TODO: notify somehow
-                    self.logger.info("KITTY DETECTED")
+                detected_class = self.cat_detector.invoke(frame)
+                # if cat_present:
+                #     # TODO: notify somehow
+                self.logger.info(f"Detected a: {detected_class}")
 
             if elapsed >= 1.0:
                 self.fps = self.frame_count / elapsed
