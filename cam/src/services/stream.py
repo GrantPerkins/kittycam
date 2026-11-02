@@ -164,7 +164,6 @@ class KittyCamera:
                     break
 
                 frame = self.latest_jpeg
-            self.pushover.send("test")
             yield (
                 b"--frame\r\n"
                 b"Content-Type: image/jpeg\r\n\r\n"
