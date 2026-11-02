@@ -20,11 +20,8 @@ class YoloCatDetector:
 
             for box in result.boxes:
                 class_id = int(box.cls.item())
-                confidence = float(box.conf.item())
                 class_name = result.names[class_id].lower()
-                # if confidence < 0.25:
-                #     return "nothing"
-                return class_name+" "+str(confidence)
-        return "nothing"
+                if class_name in ["cat", "dog"]:
+                    return class_name
 
             

@@ -5,6 +5,8 @@ services:
       - "8000"
     devices:
       - /dev/video0:/dev/video0
+    secrets:
+      - pushover_token
 
   cloudflared:
     image: cloudflare/cloudflared:latest
@@ -17,3 +19,7 @@ services:
 
     depends_on:
       - kittycam-server
+
+secrets:
+  pushover_token:
+    file: ./cam/.env

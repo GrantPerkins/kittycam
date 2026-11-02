@@ -6,12 +6,14 @@ import cv2
 from fastapi import Request
 
 from src.services.yolo26 import YoloCatDetector
+from src.services.pushover import PushNotifications
 from src.utils.logger import get_logger
 
 
 class KittyCamera:
-    def __init__(self, cat_detector:YoloCatDetector|None=None):
+    def __init__(self, cat_detector:YoloCatDetector, pushover:PushNotifications):
         self.logger = get_logger()
+        self.pushover = pushover
 
         self.camera = cv2.VideoCapture("/dev/video0")
         self.camera.set(
@@ -91,9 +93,9 @@ class KittyCamera:
             elapsed = now - self.last_fps_time
 
             if self.cat_detector is not None and self.real_frame_count == 0:
-                detected_class = self.cat_detector.invoke(frame)
-                # if cat_present:
-                #     # TODO: notify somehow
+                detected = self.cat_detector.invoke(frame)
+                if detected:
+                    self.pushover.send(detected)
 
             if elapsed >= 1.0:
                 self.fps = self.frame_count / elapsed
@@ -160,7 +162,7 @@ class KittyCamera:
                     break
 
                 frame = self.latest_jpeg
-
+            self.pushover.send("test")
             yield (
                 b"--frame\r\n"
                 b"Content-Type: image/jpeg\r\n\r\n"
