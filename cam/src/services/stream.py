@@ -8,6 +8,7 @@ from fastapi import Request
 from src.services.yolo26 import YoloCatDetector
 from src.services.pushover import PushNotifications
 from src.utils.logger import get_logger
+from src.utils.timer import get_time_now_seconds
 
 
 class KittyCamera:
@@ -38,11 +39,12 @@ class KittyCamera:
 
         self.latest_jpeg: bytes = b""
         self.cat_detector = cat_detector
+        self.last_detection = None
+        self.detection_frequency_seconds = 60
         self.condition = threading.Condition()
 
         # FPS tracking
         self.frame_count = 0
-        self.real_frame_count = 0
         self.last_fps_time = time.monotonic()
         self.fps = 0.0
 
@@ -92,8 +94,9 @@ class KittyCamera:
             now = time.monotonic()
             elapsed = now - self.last_fps_time
 
-            if self.cat_detector is not None and self.real_frame_count == 0:
+            if self.last_detection is None or self.last_detection + self.detection_frequency_seconds > get_time_now_seconds():
                 detected = self.cat_detector.invoke(frame)
+                self.last_detection = get_time_now_seconds()
                 if detected:
                     self.pushover.send(detected)
 
