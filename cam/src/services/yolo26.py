@@ -14,7 +14,6 @@ class YoloCatDetector:
             self._model.predict(image, stream=True)
         )
 
-
         for result in results:
             if result.boxes is None:
                 continue
@@ -23,9 +22,9 @@ class YoloCatDetector:
                 class_id = int(box.cls.item())
                 confidence = float(box.conf.item())
                 class_name = result.names[class_id].lower()
-                if confidence < 0.25:
-                    return False
-                return class_name
-
+                # if confidence < 0.25:
+                #     return "nothing"
+                return class_name+" "+str(confidence)
+        return "nothing"
 
             
