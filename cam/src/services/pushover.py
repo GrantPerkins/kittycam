@@ -1,7 +1,7 @@
 import requests
 import time
 
-from utils.secrets import get_pushover_token_and_userid
+from src.utils.secrets import get_pushover_token_and_userid
 
 class PushNotifications:
     # via Pushover
