@@ -9,3 +9,6 @@ httpx
 ultralytics
 wheel>=0.46.2
 jaraco.context>=6.1.0
+setuptools>=84.1.0
+urllib3>=2.8.0
+msgpack>=1.2.3
