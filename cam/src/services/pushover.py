@@ -18,11 +18,11 @@ class PushNotifications:
         if self.last is None or self.last + self.frequency_seconds < self.__now_seconds():
             response = requests.post(
                 self.url,
-                    data={
-                        "token": self.token,
-                        "user": self.userid,
-                        "message": f"{animal} detected on kittycam",
-                    },
+                data={
+                    "token": self.token,
+                    "user": self.userid,
+                    "message": f"{animal} detected on kittycam",
+                },
             )
 
             response.raise_for_status()

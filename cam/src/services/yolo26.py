@@ -21,7 +21,7 @@ class YoloCatDetector:
             for box in result.boxes:
                 class_id = int(box.cls.item())
                 class_name = result.names[class_id].lower()
-                if class_name in ["cat", "dog"]:
+                if class_name in ["cat"]:
                     return class_name
 
             
